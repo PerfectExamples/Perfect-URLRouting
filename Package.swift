@@ -1,3 +1,4 @@
+// swift-tools-version:4.0
 //
 //  Package.swift
 //  PerfectExample-URLRouting
@@ -21,12 +22,10 @@ import PackageDescription
 
 let package = Package(
 	name: "URLRouting",
-	targets: [
-		
-	],
 	dependencies: [
-		.Package(url:"https://github.com/PerfectlySoft/PerfectLib.git", majorVersion: 2, minor: 0),
-		.Package(url:"https://github.com/PerfectlySoft/Perfect-HTTP.git", majorVersion: 2, minor: 0),
-		.Package(url:"https://github.com/PerfectlySoft/Perfect-HTTPServer.git", majorVersion: 2, minor: 0)
+		.package(url:"https://github.com/PerfectlySoft/Perfect-HTTPServer.git", from: "3.0.0")
+	],
+	targets: [
+		.target(name: "URLRouting", dependencies: ["PerfectHTTPServer"], path: "Sources")
 	]
 )
