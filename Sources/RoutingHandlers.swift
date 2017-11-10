@@ -56,9 +56,9 @@ func makeURLRoutes() -> Routes {
 	var api2Routes = Routes(baseUri: "/v2")
 
 	// Add the main API calls to version 1
-	api1Routes.add(routes: api)
+	api1Routes.add(api)
 	// Add the main API calls to version 2
-	api2Routes.add(routes: api)
+	api2Routes.add(api)
 	// Update the call2 API
 	api2Routes.add(method: .get, uri: "/call2", handler: { _, response in
 		response.setBody(string: "API v2 CALL 2")
@@ -66,8 +66,8 @@ func makeURLRoutes() -> Routes {
 	})
 
 	// Add both versions to the main server routes
-	routes.add(routes: api1Routes)
-	routes.add(routes: api2Routes)
+	routes.add(api1Routes)
+	routes.add(api2Routes)
 
 	// Check the console to see the logical structure of what was installed.
 	print("\(routes.navigator.description)")
@@ -101,7 +101,8 @@ func echo4Handler(request: HTTPRequest, _ response: HTTPResponse) {
 }
 
 func rawPOSTHandler(request: HTTPRequest, _ response: HTTPResponse) {
-	response.appendBody(string: "<html><body>Raw POST handler: You POSTED to path \(request.path) with content-type \(request.header(.contentType)) and POST body \(request.postBodyString)</body></html>")
+	// see https://stackoverflow.com/a/42543251 for explanation of "as Optional" usage
+	response.appendBody(string: "<html><body>Raw POST handler: You POSTED to path \(request.path) with content-type \(request.header(.contentType) as Optional) and POST body \(request.postBodyString as Optional)</body></html>")
 	response.completed()
 }
 
