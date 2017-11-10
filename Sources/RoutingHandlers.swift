@@ -101,7 +101,8 @@ func echo4Handler(request: HTTPRequest, _ response: HTTPResponse) {
 }
 
 func rawPOSTHandler(request: HTTPRequest, _ response: HTTPResponse) {
-	response.appendBody(string: "<html><body>Raw POST handler: You POSTED to path \(request.path) with content-type \(request.header(.contentType)) and POST body \(request.postBodyString)</body></html>")
+	// see https://stackoverflow.com/a/42543251 for explanation of "as Optional" usage
+	response.appendBody(string: "<html><body>Raw POST handler: You POSTED to path \(request.path) with content-type \(request.header(.contentType) as Optional) and POST body \(request.postBodyString as Optional)</body></html>")
 	response.completed()
 }
 
