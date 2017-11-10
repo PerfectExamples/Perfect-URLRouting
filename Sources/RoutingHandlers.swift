@@ -56,9 +56,9 @@ func makeURLRoutes() -> Routes {
 	var api2Routes = Routes(baseUri: "/v2")
 
 	// Add the main API calls to version 1
-	api1Routes.add(routes: api)
+	api1Routes.add(api)
 	// Add the main API calls to version 2
-	api2Routes.add(routes: api)
+	api2Routes.add(api)
 	// Update the call2 API
 	api2Routes.add(method: .get, uri: "/call2", handler: { _, response in
 		response.setBody(string: "API v2 CALL 2")
@@ -66,8 +66,8 @@ func makeURLRoutes() -> Routes {
 	})
 
 	// Add both versions to the main server routes
-	routes.add(routes: api1Routes)
-	routes.add(routes: api2Routes)
+	routes.add(api1Routes)
+	routes.add(api2Routes)
 
 	// Check the console to see the logical structure of what was installed.
 	print("\(routes.navigator.description)")
